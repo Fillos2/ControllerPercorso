@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ControllerPercorso</class>
+ <widget class="QMainWindow" name="ControllerPercorso">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>638</width>
+    <height>568</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>ControllerPercorso</string>
+  </property>
+  <widget class="QWidget" name="centralWidget"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>638</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionNuovo"/>
+    <addaction name="actionApri"/>
+    <addaction name="actionSalva"/>
+    <addaction name="separator"/>
+    <addaction name="actionInvia_Percorso"/>
+   </widget>
+   <widget class="QMenu" name="menuInserisci">
+    <property name="title">
+     <string>Inserisci</string>
+    </property>
+    <addaction name="actionAvanti"/>
+    <addaction name="actionSvolta_Destra"/>
+    <addaction name="actionSvolta_Sinistra"/>
+    <addaction name="actionLoop"/>
+    <addaction name="actionContinua"/>
+   </widget>
+   <widget class="QMenu" name="menuInfo">
+    <property name="title">
+     <string>Info</string>
+    </property>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuInserisci"/>
+   <addaction name="menuInfo"/>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionAvanti"/>
+   <addaction name="actionSvolta_Destra"/>
+   <addaction name="actionSvolta_Sinistra"/>
+   <addaction name="actionLoop"/>
+   <addaction name="actionContinua"/>
+   <addaction name="separator"/>
+   <addaction name="actionInvia_Percorso"/>
+   <addaction name="actionConnetti"/>
+   <addaction name="actionDisconnetti"/>
+   <addaction name="actionConfigura"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionNuovo">
+   <property name="text">
+    <string>Nuovo</string>
+   </property>
+  </action>
+  <action name="actionApri">
+   <property name="text">
+    <string>Apri</string>
+   </property>
+  </action>
+  <action name="actionSalva">
+   <property name="text">
+    <string>Salva</string>
+   </property>
+  </action>
+  <action name="actionInvia_Percorso">
+   <property name="icon">
+    <iconset resource="controllerPercorso.qrc">
+     <normaloff>:/icone progetto percorso/upload-icon[1].jpg</normaloff>:/icone progetto percorso/upload-icon[1].jpg</iconset>
+   </property>
+   <property name="text">
+    <string>Invia Percorso</string>
+   </property>
+  </action>
+  <action name="actionAvanti">
+   <property name="icon">
+    <iconset resource="controllerPercorso.qrc">
+     <normaloff>:/icone progetto percorso/dirittobtn.bmp</normaloff>:/icone progetto percorso/dirittobtn.bmp</iconset>
+   </property>
+   <property name="text">
+    <string>Avanti</string>
+   </property>
+  </action>
+  <action name="actionSvolta_Destra">
+   <property name="icon">
+    <iconset resource="controllerPercorso.qrc">
+     <normaloff>:/icone progetto percorso/dx.bmp</normaloff>:/icone progetto percorso/dx.bmp</iconset>
+   </property>
+   <property name="text">
+    <string>Svolta Destra</string>
+   </property>
+  </action>
+  <action name="actionSvolta_Sinistra">
+   <property name="icon">
+    <iconset resource="controllerPercorso.qrc">
+     <normaloff>:/icone progetto percorso/sx.bmp</normaloff>:/icone progetto percorso/sx.bmp</iconset>
+   </property>
+   <property name="text">
+    <string>Svolta Sinistra</string>
+   </property>
+  </action>
+  <action name="actionLoop">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="controllerPercorso.qrc">
+     <normaloff>:/icone progetto percorso/loopbtn.bmp</normaloff>:/icone progetto percorso/loopbtn.bmp</iconset>
+   </property>
+   <property name="text">
+    <string>Loop</string>
+   </property>
+  </action>
+  <action name="actionContinua">
+   <property name="icon">
+    <iconset resource="controllerPercorso.qrc">
+     <normaloff>:/icone progetto percorso/continue.bmp</normaloff>:/icone progetto percorso/continue.bmp</iconset>
+   </property>
+   <property name="text">
+    <string>Continua</string>
+   </property>
+  </action>
+  <action name="actionConnetti">
+   <property name="text">
+    <string>Connetti</string>
+   </property>
+  </action>
+  <action name="actionDisconnetti">
+   <property name="text">
+    <string>Disconnetti</string>
+   </property>
+  </action>
+  <action name="actionConfigura">
+   <property name="text">
+    <string>configura</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="controllerPercorso.qrc"/>
+ </resources>
+ <connections/>
+</ui>

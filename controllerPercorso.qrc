@@ -1,0 +1,22 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icone progetto percorso/continue.bmp</file>
+        <file>icone progetto percorso/continue.jpg</file>
+        <file>icone progetto percorso/continue2.jpg</file>
+        <file>icone progetto percorso/delete.bmp</file>
+        <file>icone progetto percorso/dirittobtn.bmp</file>
+        <file>icone progetto percorso/dritto.jpg</file>
+        <file>icone progetto percorso/dx.bmp</file>
+        <file>icone progetto percorso/dx.jpg</file>
+        <file>icone progetto percorso/fig II-81a.jpg</file>
+        <file>icone progetto percorso/IMG_20120611_163932.jpg</file>
+        <file>icone progetto percorso/loop.jpg</file>
+        <file>icone progetto percorso/loopbtn.bmp</file>
+        <file>icone progetto percorso/stock-vector-end-flag-illustration-26697307.jpg</file>
+        <file>icone progetto percorso/stock-vector-start-flag-illustration-26697331.jpg</file>
+        <file>icone progetto percorso/sx.bmp</file>
+        <file>icone progetto percorso/sx.jpg</file>
+        <file>icone progetto percorso/upload-icon[1].bmp</file>
+        <file>icone progetto percorso/upload-icon[1].jpg</file>
+    </qresource>
+</RCC>
