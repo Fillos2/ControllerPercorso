@@ -112,7 +112,7 @@ void ControllerPercorso::invia()
 
 void ControllerPercorso::openSerialPort()
 {
-    if(ui->actionConnetti->isEnabled()){
+
         SettingsDialog::Settings p = settings->settings();
         serial->setPortName(p.name);
         serial->setBaudRate(p.baudRate);
@@ -134,7 +134,7 @@ void ControllerPercorso::openSerialPort()
             if(serial->isOpen())
             QMessageBox::information(this,"boh","porta abile");
         }
-        }
+
 }
 
 void ControllerPercorso::closeSerialPort()
@@ -187,7 +187,7 @@ void ControllerPercorso::setupPercorso()
     connect(ui->actionLoop,SIGNAL(triggered()),this,SLOT(loop()));
     connect(ui->actionContinua,SIGNAL(triggered()),this,SLOT(continua()));
     connect(ui->actionInvia_Percorso,SIGNAL(triggered()),this,SLOT(invia()));
-    connect(ui->actionConnetti,SIGNAL(triggered()),this,SLOT(openSerialPort()));
+
 
 }
 
