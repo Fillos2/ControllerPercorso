@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <block.h>
 #include <QList>
+#include<QByteArray>
 #include <QtSerialPort/QSerialPort>
 namespace Ui {
 class ControllerPercorso;
