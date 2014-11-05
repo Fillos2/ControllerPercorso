@@ -57,7 +57,9 @@ void loop(){
       directive = EEPROM.read(indR);
       Serial.print("indice = ");
       Serial.println(indR);
+      Serial.print("direttiva = ");
       Serial.println(directive);
+      Serial.print("tempo = ");
       Serial.println(EEPROM.read(indR+1));
       indR++;
       if (directive == 0xff)
