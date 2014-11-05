@@ -5,6 +5,7 @@
 #include <block.h>
 #include "settingsdialog.h"
 
+
 #include<QtSerialPort/QSerialPort>
 ControllerPercorso::ControllerPercorso(QWidget *parent) :
     QMainWindow(parent),
@@ -12,9 +13,6 @@ ControllerPercorso::ControllerPercorso(QWidget *parent) :
 {
     ui->setupUi(this);
     setupPercorso();
-   /* console = new Console;
-    console->setEnabled(false);
-    setCentralWidget(console);*/
 //! [1]
     serial = new QSerialPort(this);
 //! [1]
@@ -77,36 +75,36 @@ void ControllerPercorso::continua()
 
 void ControllerPercorso::invia()
 {
-     char * percorso;
-     int speed, contatore=0;
+     QByteArray * percorso;
+     int speed;
      unsigned int i;
-     percorso = new char[2*ControllerPercorso::Percorso.size()-1];
+     percorso = new QByteArray();
      //speed = calcolaspeed();
      for (i =0;i<ControllerPercorso::Percorso.size();i++){
-         if(ControllerPercorso::Percorso[i]->type  == Start)percorso[contatore++]=0x24;
+         if(ControllerPercorso::Percorso[i]->type  == Start)percorso->push_back(0x24);
          else if(ControllerPercorso::Percorso[i]->type== Loop){
-            percorso[contatore++]= 2;
+            percorso->push_back(0x2);
             break;
          }
          else if(ControllerPercorso::Percorso[i]->type== End){
-            percorso[contatore++]=255;
+            percorso->push_back(0xff);
             break;
          }
          else if(ControllerPercorso::Percorso[i]->type== Avanti){
-            percorso[contatore++]=  0x0f;
-            percorso[contatore++]=  (char)25;
+            percorso->push_back(0x0f);
+            percorso->push_back(0x19);
          }
          else if(ControllerPercorso::Percorso[i]->type== Sx){
-            percorso[contatore++]= 0x80;
-            percorso[contatore++]= (char) 125;
+            percorso->push_back(0x80);
+            percorso->push_back(0x7D);
          }
          else if(ControllerPercorso::Percorso[i]->type== Dx){
-            percorso[contatore++]= 0x40;
-            percorso[contatore++]= (char) 125;
+            percorso->push_back(0x40);
+            percorso->push_back(0x7D);
          }
      }
-     QMessageBox::information(this,"info",percorso);
-
+     //QMessageBox::information(this,"info",percorso->);
+    writeData(*percorso);
 
 }
 
