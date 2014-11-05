@@ -96,11 +96,11 @@ void ControllerPercorso::invia()
          }
          else if(ControllerPercorso::Percorso[i]->type== Sx){
             percorso->push_back(0x80);
-            percorso->push_back(0x7D);
+            percorso->push_back(0x1F);
          }
          else if(ControllerPercorso::Percorso[i]->type== Dx){
             percorso->push_back(0x40);
-            percorso->push_back(0x7D);
+            percorso->push_back(0x1F);
          }
      }
      //QMessageBox::information(this,"info",percorso->);
