@@ -4,6 +4,7 @@
 #include <QtWidgets>
 #include <block.h>
 #include "settingsdialog.h"
+#include <QFile>
 
 
 #include<QtSerialPort/QSerialPort>
@@ -103,9 +104,9 @@ void ControllerPercorso::invia()
             percorso->push_back(0x1F);
          }
      }
-     //QMessageBox::information(this,"info",percorso->);
-    writeData(*percorso);
 
+    writeData(*percorso);
+    QMessageBox::information(this,"Successo","Percorso inviato con successo");
 }
 
 void ControllerPercorso::openSerialPort()
@@ -161,7 +162,33 @@ void ControllerPercorso::writeData(const QByteArray &data)
 void ControllerPercorso::readData()
 {
     QByteArray data = serial->readAll();
-   // console->putData(data);
+    // console->putData(data);
+}
+
+void ControllerPercorso::salva()
+{
+    QString fileName = QFileDialog::getSaveFileName(this,
+             tr("Save percorso"), "",
+             tr("Percorso (*.pcr);;All Files (*)"));
+    if (fileName.isEmpty())
+           return;
+       else {
+           QFile file(fileName);
+           if (!file.open(QIODevice::WriteOnly)) {
+               QMessageBox::information(this, tr("Unable to open file"),
+                   file.errorString());
+               return;
+           }
+
+           QDataStream out(&file);
+
+           out << ControllerPercorso::Percorso;
+    }
+}
+
+void ControllerPercorso::apri()
+{
+
 }
 
 void ControllerPercorso::handleError(QSerialPort::SerialPortError error)
@@ -185,7 +212,7 @@ void ControllerPercorso::setupPercorso()
     connect(ui->actionLoop,SIGNAL(triggered()),this,SLOT(loop()));
     connect(ui->actionContinua,SIGNAL(triggered()),this,SLOT(continua()));
     connect(ui->actionInvia_Percorso,SIGNAL(triggered()),this,SLOT(invia()));
-
+    connect(ui->actionSalva,SIGNAL(triggered()),this,SLOT(salva()));
 
 }
 
