@@ -167,6 +167,7 @@ void ControllerPercorso::readData()
 
 void ControllerPercorso::salva()
 {
+    int i;
     QString fileName = QFileDialog::getSaveFileName(this,
              tr("Save percorso"), "",
              tr("Percorso (*.pcr);;All Files (*)"));
@@ -180,15 +181,55 @@ void ControllerPercorso::salva()
                return;
            }
 
-           QDataStream out(&file);
+           QTextStream out(&file);
 
-           out << ControllerPercorso::Percorso;
+           for (i =0;i<ControllerPercorso::Percorso.size();i++){
+               if(ControllerPercorso::Percorso[i]->type  == Start)
+                   out<<"Start"<<endl;
+               else if(ControllerPercorso::Percorso[i]->type== Loop){
+                  out<<"Loop"<<endl;
+               }
+               else if(ControllerPercorso::Percorso[i]->type== End){
+                  out<<"End"<<endl;
+               }
+               else if(ControllerPercorso::Percorso[i]->type== Avanti){
+                  out<<"Avanti"<<endl;
+               }
+               else if(ControllerPercorso::Percorso[i]->type== Sx){
+                  out<<"Sx"<<endl;
+               }
+               else if(ControllerPercorso::Percorso[i]->type== Dx){
+                 out<<"Dx"<<endl;
+               }
+            }
+           file.close();
     }
 }
 
 void ControllerPercorso::apri()
 {
+    QList<Block*> Percorso_tmp;
+    QString fileName = QFileDialog::getOpenFileName(this,
+            tr("Apri Percorso"), "",
+            tr("Address Book (*.pcr);;All Files (*)"));
+    if (fileName.isEmpty())
+            return;
+        else {
 
+            QFile file(fileName);
+
+            if (!file.open(QIODevice::ReadOnly)) {
+                QMessageBox::information(this, tr("Unable to open file"),
+                    file.errorString());
+                return;
+            }
+
+            QTextStream in(&file);
+            //in.setVersion(QDataStream::Qt_4_5);
+            //contacts.empty();   // empty existing contacts
+            //in >> Percorso_tmp;
+    file.close();
+    }
 }
 
 void ControllerPercorso::handleError(QSerialPort::SerialPortError error)
@@ -213,7 +254,7 @@ void ControllerPercorso::setupPercorso()
     connect(ui->actionContinua,SIGNAL(triggered()),this,SLOT(continua()));
     connect(ui->actionInvia_Percorso,SIGNAL(triggered()),this,SLOT(invia()));
     connect(ui->actionSalva,SIGNAL(triggered()),this,SLOT(salva()));
-
+    connect(ui->actionApri,SIGNAL(triggered()),this,SLOT(apri()));
 }
 
 void ControllerPercorso::initActionsConnections()
