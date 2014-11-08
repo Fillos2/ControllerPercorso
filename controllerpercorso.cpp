@@ -209,9 +209,13 @@ void ControllerPercorso::salva()
 void ControllerPercorso::apri()
 {
     QList<Block*> Percorso_tmp;
+    QString Blocco;
+    Block * lastBlock;
+    Block * nowBlock;
+
     QString fileName = QFileDialog::getOpenFileName(this,
             tr("Apri Percorso"), "",
-            tr("Address Book (*.pcr);;All Files (*)"));
+            tr("Percorso (*.pcr);;All Files (*)"));
     if (fileName.isEmpty())
             return;
         else {
@@ -225,9 +229,46 @@ void ControllerPercorso::apri()
             }
 
             QTextStream in(&file);
-            //in.setVersion(QDataStream::Qt_4_5);
-            //contacts.empty();   // empty existing contacts
-            //in >> Percorso_tmp;
+            while(in.status()!= QTextStream::ReadPastEnd){
+                in >> Blocco;
+                lastBlock = ControllerPercorso::Percorso.last();
+                if(Blocco == "Loop"){
+                    nowBlock = new Block(Loop,this);
+                    nowBlock->setPosizione(lastBlock->x()+80,lastBlock->y());
+                    lastBlock->setEnabled(false);
+                    ControllerPercorso::Percorso.push_back(nowBlock);
+
+                }
+                else if(Blocco == "End"){
+                    nowBlock = new Block(End,this);
+                    nowBlock->setPosizione(lastBlock->x()+80,lastBlock->y());
+                    lastBlock->setEnabled(false);
+                    ControllerPercorso::Percorso.push_back(nowBlock);
+
+                }
+                else if(Blocco== "Avanti"){
+                    nowBlock = new Block(Avanti,this);
+                    nowBlock->setPosizione(lastBlock->x()+80,lastBlock->y());
+                    lastBlock->setEnabled(false);
+                    ControllerPercorso::Percorso.push_back(nowBlock);
+
+                }
+                else if(Blocco== "Sx"){
+                    nowBlock = new Block(Sx,this);
+                    nowBlock->setPosizione(lastBlock->x()+80,lastBlock->y());
+                    lastBlock->setEnabled(false);
+                    ControllerPercorso::Percorso.push_back(nowBlock);
+
+
+                }
+                else if(Blocco== "Dx"){
+                    nowBlock = new Block(Dx,this);
+                    nowBlock->setPosizione(lastBlock->x()+80,lastBlock->y());
+                    lastBlock->setEnabled(false);
+                    ControllerPercorso::Percorso.push_back(nowBlock);
+
+                }
+            }
     file.close();
     }
 }
