@@ -232,6 +232,16 @@ void ControllerPercorso::apri()
     }
 }
 
+void ControllerPercorso::newInstance()
+{
+    QProcess * myProcess = new QProcess();
+    //QMessageBox::information(this,"ciccia",QDir::currentPath());
+
+   // QString path = "/home/filippo/Documenti/fondinfo/build-test-Desktop_Qt_5_3_GCC_32bit-Debug/test";
+    myProcess->start(QDir::currentPath()+"/ControllerPercorso");
+
+}
+
 void ControllerPercorso::handleError(QSerialPort::SerialPortError error)
 {
     if (error == QSerialPort::ResourceError) {
@@ -255,6 +265,7 @@ void ControllerPercorso::setupPercorso()
     connect(ui->actionInvia_Percorso,SIGNAL(triggered()),this,SLOT(invia()));
     connect(ui->actionSalva,SIGNAL(triggered()),this,SLOT(salva()));
     connect(ui->actionApri,SIGNAL(triggered()),this,SLOT(apri()));
+    connect(ui->actionNuovo,SIGNAL(triggered()),this,SLOT(newInstance()));
 }
 
 void ControllerPercorso::initActionsConnections()
@@ -268,3 +279,5 @@ void ControllerPercorso::initActionsConnections()
     connect(ui->actionAbout, SIGNAL(triggered()), this, SLOT(about()));
     connect(ui->actionAboutQt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));*/
 }
+
+

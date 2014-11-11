@@ -6,6 +6,7 @@
 #include <QList>
 #include<QByteArray>
 #include <QtSerialPort/QSerialPort>
+#include <QProcess>
 namespace Ui {
 class ControllerPercorso;
 }
@@ -35,8 +36,11 @@ private slots:
     void readData();
     void salva();
     void apri();
+    void newInstance();
 
     void handleError(QSerialPort::SerialPortError error);
+
+
 private:
     Ui::ControllerPercorso *ui;
     void setupPercorso();
