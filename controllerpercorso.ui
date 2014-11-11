@@ -20,7 +20,7 @@
      <x>0</x>
      <y>0</y>
      <width>638</width>
-     <height>27</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -30,6 +30,7 @@
     <addaction name="actionNuovo"/>
     <addaction name="actionApri"/>
     <addaction name="actionSalva"/>
+    <addaction name="actionInfo"/>
     <addaction name="separator"/>
     <addaction name="actionInvia_Percorso"/>
    </widget>
@@ -43,14 +44,8 @@
     <addaction name="actionLoop"/>
     <addaction name="actionContinua"/>
    </widget>
-   <widget class="QMenu" name="menuInfo">
-    <property name="title">
-     <string>Info</string>
-    </property>
-   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuInserisci"/>
-   <addaction name="menuInfo"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -156,6 +151,11 @@
   <action name="actionConfigura">
    <property name="text">
     <string>configura</string>
+   </property>
+  </action>
+  <action name="actionInfo">
+   <property name="text">
+    <string>Info</string>
    </property>
   </action>
  </widget>

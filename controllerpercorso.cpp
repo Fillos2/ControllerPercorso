@@ -14,37 +14,24 @@ ControllerPercorso::ControllerPercorso(QWidget *parent) :
 {
     ui->setupUi(this);
     setupPercorso();
-//! [1]
     serial = new QSerialPort(this);
-//! [1]
     settings = new SettingsDialog;
-
     ui->actionConnetti->setEnabled(true);
     ui->actionDisconnetti->setEnabled(false);
-   // ui->actionQuit->setEnabled(true);
     ui->actionConfigura->setEnabled(true);
 
     initActionsConnections();
 
     connect(serial, SIGNAL(error(QSerialPort::SerialPortError)), this,
             SLOT(handleError(QSerialPort::SerialPortError)));
-
-//! [2]
     connect(serial, SIGNAL(readyRead()), this, SLOT(readData()));
-//! [2]
-  //  connect(console, SIGNAL(getData(QByteArray)), this, SLOT(writeData(QByteArray)));
-//! [3]
-
-
-
-
 }
+
 QList<Block*> ControllerPercorso::Percorso;
 
 ControllerPercorso::~ControllerPercorso()
 {
     delete ui;
-
 }
 
 void ControllerPercorso::avanti()
@@ -120,8 +107,6 @@ void ControllerPercorso::openSerialPort()
         serial->setStopBits(p.stopBits);
         serial->setFlowControl(p.flowControl);
         if (serial->open(QIODevice::ReadWrite)) {
-                //console->setEnabled(true);
-                //console->setLocalEchoEnabled(p.localEchoEnabled);
                 ui->actionConnetti->setEnabled(false);
                 ui->actionDisconnetti->setEnabled(true);
                 ui->actionConfigura->setEnabled(false);
@@ -139,7 +124,6 @@ void ControllerPercorso::openSerialPort()
 void ControllerPercorso::closeSerialPort()
 {
     serial->close();
-    //console->setEnabled(false);
     ui->actionConnetti->setEnabled(true);
     ui->actionDisconnetti->setEnabled(false);
     ui->actionConfigura->setEnabled(true);
@@ -148,10 +132,8 @@ void ControllerPercorso::closeSerialPort()
 
 void ControllerPercorso::about()
 {
-    QMessageBox::about(this, tr("About Simple Terminal"),
-                       tr("The <b>Simple Terminal</b> example demonstrates how to "
-                          "use the Qt Serial Port module in modern GUI applications "
-                          "using Qt, with a menu bar, toolbars, and a status bar."));
+    QMessageBox::about(this, tr("Info Controller Percorso "),
+                       tr("L'applicazione <b>Controller Percorso</b> serve a comunicare con la scheda a micro controllore Arduino montata su un robot a due ruote, il programma consente di creare un percorso in maniera intuitiva e inviarlo al robot tramite connessione seriale, inoltre vi è la possibilità di salvare il percorso tracciato su un file che può essere riaperto a piacere"));
 }
 
 void ControllerPercorso::writeData(const QByteArray &data)
@@ -307,6 +289,7 @@ void ControllerPercorso::setupPercorso()
     connect(ui->actionSalva,SIGNAL(triggered()),this,SLOT(salva()));
     connect(ui->actionApri,SIGNAL(triggered()),this,SLOT(apri()));
     connect(ui->actionNuovo,SIGNAL(triggered()),this,SLOT(newInstance()));
+    connect(ui->actionInfo,SIGNAL(triggered()),this,SLOT(about()));
 }
 
 void ControllerPercorso::initActionsConnections()
