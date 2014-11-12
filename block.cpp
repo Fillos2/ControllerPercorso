@@ -81,16 +81,23 @@ void Block::setPosizione(int x, int y)
 
 void Block::mousePressEvent(QMouseEvent * event)
 {
-    if(type != Start){
+    if(type != Start && type != Continue2){
     ControllerPercorso::Percorso.removeAll(this);
-    ControllerPercorso::Percorso.last()->setEnabled(true);
+    if (this->type == Continue1){
+        ControllerPercorso::Percorso.removeAll(this->brother);
+
     }
+    if(ControllerPercorso::Percorso.last()->type == Continue2 && !ControllerPercorso::Percorso.last()->isEnabled() )
+    ControllerPercorso::Percorso.last()->brother->setEnabled(true);
+    }
+    ControllerPercorso::Percorso.last()->setEnabled(true);
+
     offset = event->pos();
 }
 
 void Block::mouseMoveEvent(QMouseEvent * event)
 {
-    if(type != Start){
+    if(type != Start && type != Continue2){
         if(event->buttons() & Qt::LeftButton ){
             this->move(mapToParent(event->pos() - offset));
         }
@@ -99,12 +106,17 @@ void Block::mouseMoveEvent(QMouseEvent * event)
 
 void Block::mouseReleaseEvent(QMouseEvent *event)
 {
-
+    if(type != Start && type != Continue2){
     Block * lastBlock = ControllerPercorso::Percorso.last();
     if(controlla_posiz(lastBlock->x(),lastBlock->y(),event)){
 
          this->setPosizione(lastBlock->x()+80,lastBlock->y());
          lastBlock->setEnabled(false);
          ControllerPercorso::Percorso.push_back(this);
+         if(type == Continue1){
+             this->setEnabled(false);
+             ControllerPercorso::Percorso.push_back(this->brother);
+        }
+    }
     }
 }

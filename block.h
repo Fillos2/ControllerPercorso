@@ -24,6 +24,7 @@ public:
     TypeBlock type;
     bool controlla_posiz(int x, int y, QMouseEvent *event);
     void setPosizione(int x,int y);
+    Block * brother;
 protected:
 
     void mousePressEvent(QMouseEvent *event);

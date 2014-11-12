@@ -57,8 +57,13 @@ void ControllerPercorso::loop()
 
 void ControllerPercorso::continua()
 {
+    static int cont=1;
     listaBlocchi.push_back(new Block(Continue1,this));
-    listaBlocchi.push_back(new Block(Continue2,this));
+    listaBlocchi.last()->brother=new Block(Continue2,this);
+    listaBlocchi.last()->brother->brother=listaBlocchi.last();
+    listaBlocchi.push_back(listaBlocchi.last()->brother);
+    listaBlocchi.last()->setPosizione(20,100+80*cont);
+    cont++;
 }
 
 void ControllerPercorso::invia()
@@ -150,6 +155,7 @@ void ControllerPercorso::readData()
 void ControllerPercorso::salva()
 {
     int i;
+
     QString fileName = QFileDialog::getSaveFileName(this,
              tr("Save percorso"), "",
              tr("Percorso (*.pcr);;All Files (*)"));
@@ -183,6 +189,12 @@ void ControllerPercorso::salva()
                else if(ControllerPercorso::Percorso[i]->type== Dx){
                  out<<"Dx"<<endl;
                }
+               else if(ControllerPercorso::Percorso[i]->type== Continue1){
+                  out<<"Continue1"<<endl;
+               }
+               else if(ControllerPercorso::Percorso[i]->type== Continue2){
+                  out<<"Continue2"<<endl;
+               }
             }
            file.close();
     }
@@ -194,7 +206,7 @@ void ControllerPercorso::apri()
     QString Blocco;
     Block * lastBlock;
     Block * nowBlock;
-
+    static int cont = 1;
     QString fileName = QFileDialog::getOpenFileName(this,
             tr("Apri Percorso"), "",
             tr("Percorso (*.pcr);;All Files (*)"));
@@ -247,6 +259,23 @@ void ControllerPercorso::apri()
                     nowBlock = new Block(Dx,this);
                     nowBlock->setPosizione(lastBlock->x()+80,lastBlock->y());
                     lastBlock->setEnabled(false);
+                    ControllerPercorso::Percorso.push_back(nowBlock);
+
+                }
+                else if(Blocco== "Continue1"){
+                    nowBlock = new Block(Continue1,this);
+                    nowBlock->setPosizione(lastBlock->x()+80,lastBlock->y());
+                    lastBlock->setEnabled(false);
+                    ControllerPercorso::Percorso.push_back(nowBlock);
+
+                }
+                else if(Blocco== "Continue2"){
+                    nowBlock = new Block(Continue2,this);
+                    nowBlock->setPosizione(20,100+80*cont);
+                    lastBlock->setEnabled(false);
+                    cont++;
+                    nowBlock->brother = lastBlock;
+                    lastBlock->brother = nowBlock;
                     ControllerPercorso::Percorso.push_back(nowBlock);
 
                 }
