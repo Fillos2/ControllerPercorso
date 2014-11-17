@@ -112,9 +112,11 @@ void Block::mouseReleaseEvent(QMouseEvent *event)
 
          this->setPosizione(lastBlock->x()+80,lastBlock->y());
          lastBlock->setEnabled(false);
+         if(lastBlock->type == Continue2)
+             lastBlock->brother->setEnabled(false);
          ControllerPercorso::Percorso.push_back(this);
          if(type == Continue1){
-             this->setEnabled(false);
+           //  this->setEnabled(false);
              ControllerPercorso::Percorso.push_back(this->brother);
         }
     }
